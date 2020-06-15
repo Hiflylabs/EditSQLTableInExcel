@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
@@ -246,7 +248,7 @@ namespace SQLServerForExcel_Addin.Extensions
             catch (Exception ex)
             {
                 Console.Write(ex.Message);
-                throw;
+                //throw;
             }
             finally
             {
@@ -429,5 +431,146 @@ namespace SQLServerForExcel_Addin.Extensions
             }
             return textOut.ToString();
         }
+
+        public static string DeleteRowsFromTable(this Excel.Worksheet sheet, string tableName)
+        {
+            Excel.Range primaryKeyColumnRange = null;
+            Excel.Range columnRange = null;
+            Excel.Range sheetCellsRange = null;
+            string primaryKey = string.Empty;
+            string sql = string.Empty;
+            Excel.Range deletedRows = null;
+            double deletedRowNum;
+            bool rowsDeleted = false;
+           
+            try
+            {                
+                deletedRows = sheet.Range["A:A"].SpecialCells(Excel.XlCellType.xlCellTypeBlanks).EntireRow;
+                //got at least 1 empty row
+                foreach (Excel.Range row in deletedRows)
+                {
+                    deletedRowNum = sheet.Application.WorksheetFunction.CountA(row);
+                    if (deletedRowNum == 0)
+                    {
+                        rowsDeleted = true;
+                    }
+                }
+                
+            }
+            catch (System.Runtime.InteropServices.COMException e)
+            {
+                rowsDeleted = false;
+            }
+
+            if (rowsDeleted == true)
+            {
+
+                primaryKey = sheet.PrimaryKey();
+                columnRange = sheet.Range["A1:CV1"];
+                sheetCellsRange = sheet.Cells;
+                primaryKeyColumnRange = columnRange.Find(primaryKey, LookAt: Excel.XlLookAt.xlWhole);
+
+                object[,] pkValues = (object[,])sheet.Columns[primaryKeyColumnRange.Column].Cells.Value;
+
+                List<string> primaryKeyValues = pkValues.Cast<object>().ToList().ConvertAll(x => Convert.ToString(x));
+                primaryKeyValues.RemoveAt(0);
+                primaryKeyValues.RemoveAll(str => String.IsNullOrEmpty(str));
+
+                string primaryKeyValuesJoined = string.Join(",", primaryKeyValues);
+                primaryKeyValuesJoined = "'" + primaryKeyValuesJoined.Replace(",", "','") + "'";
+
+                sql = "Delete from " + tableName + " Where " + primaryKey + " NOT IN( " + primaryKeyValuesJoined + ")";
+
+            }
+            //Debug.WriteLine(sql);
+
+            return sql;
+
+        }
+
+        public static string InsertRowsIntoTable(this Excel.Worksheet sheet, string tableName)
+        {
+            string sql = string.Empty;
+            List<string> rowValues = new List<string>();
+            string rowValuesJoined = string.Empty;
+            string primaryKey = string.Empty;
+
+            DateTime datetime;
+            string[] formats = new string[] { "yyyy-MM-dd HH:mm:ss",
+                                              "yyyy.MM.dd HH:mm:ss",
+                                              "yyyy. MM. dd. HH:mm:ss"};            
+
+            primaryKey = sheet.PrimaryKey();
+            //int lastTableRow;
+            int lastTableColumn;
+
+            //https://stackoverflow.com/questions/7674573/programmatically-getting-the-last-filled-excel-row-using-c-sharp
+            // Find the last real row
+            //lastTableRow = sheet.Cells.Find("*", System.Reflection.Missing.Value,System.Reflection.Missing.Value, System.Reflection.Missing.Value, Excel.XlSearchOrder.xlByRows, Excel.XlSearchDirection.xlPrevious, false, System.Reflection.Missing.Value, System.Reflection.Missing.Value).Row;
+
+            // Find the last real column
+            lastTableColumn = sheet.Cells.Find("*", System.Reflection.Missing.Value, System.Reflection.Missing.Value, System.Reflection.Missing.Value, Excel.XlSearchOrder.xlByColumns, Excel.XlSearchDirection.xlPrevious, false, System.Reflection.Missing.Value, System.Reflection.Missing.Value).Column;
+            
+            try
+            {
+                Excel.Range insertRows = sheet.Columns["A:A"].SpecialCells(Excel.XlCellType.xlCellTypeBlanks).EntireRow as Excel.Range;
+
+                Excel.Range headerRow = sheet.Rows["1:1"].EntireRow as Excel.Range;
+
+                object[,] hdrValues = (object[,])headerRow.Cells.Value;
+
+                List<string> headerRowValues = hdrValues.Cast<object>().ToList().ConvertAll(x => Convert.ToString(x));
+                headerRowValues.RemoveAll(header => header == string.Empty);
+                headerRowValues.Remove(primaryKey);
+                string headerRowValuesJoined = string.Join(",", headerRowValues);
+
+                foreach (Excel.Range row in insertRows)
+                {
+                    object[,] rwValues = (object[,])row.Cells.Value;                   
+                    rowValues = rwValues.Cast<object>().ToList().ConvertAll(x => Convert.ToString(x));                    
+                    rowValues.RemoveRange(lastTableColumn, rowValues.Count - lastTableColumn);
+                    rowValues.RemoveAt(0);                                       
+
+                    for (int i = 0; i < rowValues.Count; i++)
+                    {
+                        if (DateTime.TryParseExact(rowValues[i], formats, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.NoCurrentDateDefault, out datetime))
+                        {
+                            rowValues[i] = datetime.ToString("yyyy-MM-dd HH:mm:ss");
+                        }
+
+                        if (string.IsNullOrEmpty(rowValues[i]))
+                        {
+                            rowValues[i] = "NULL";
+                        }
+                    }
+
+                    rowValuesJoined = string.Join(",", rowValues);
+                    rowValuesJoined = "'" + rowValuesJoined.Replace(",", "','") + "'";
+                    rowValuesJoined = rowValuesJoined.Replace("'NULL'", "NULL");
+
+                    HashSet<string> unique_items = new HashSet<string>(rowValuesJoined.Split(','));
+                    
+                    if (unique_items.Count != 1)
+                    {
+                        sql += "Insert into " + tableName + "(" + headerRowValuesJoined + ") VALUES( " + rowValuesJoined + ")";
+                        sql += Environment.NewLine;
+                    }
+                    
+                }
+            }
+            catch (System.Runtime.InteropServices.COMException e)
+            {
+                Console.Write(e.Message);
+            }
+            
+
+            //Debug.WriteLine(sql);
+
+            return sql;
+        }
+
+
+
+
     }
 }

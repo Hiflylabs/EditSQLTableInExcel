@@ -355,6 +355,10 @@ namespace SQLServerForExcel_Addin
                         {
                             primaryKey = primaryKeyProperty.Value.ToString();
                             string sql = sheet.ChangesToSql(this.tableName, primaryKey);
+                            sql += Environment.NewLine;
+                            sql += sheet.DeleteRowsFromTable(this.tableName);
+                            sql += Environment.NewLine;
+                            sql += sheet.InsertRowsIntoTable(this.tableName);
 
                             if (!string.IsNullOrEmpty(sql))
                             {

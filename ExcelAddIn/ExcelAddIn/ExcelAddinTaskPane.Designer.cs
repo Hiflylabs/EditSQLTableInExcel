@@ -36,6 +36,7 @@
             this.btnSaveChangesToFile = new System.Windows.Forms.ToolStripButton();
             this.tabMain = new System.Windows.Forms.TabControl();
             this.tabDatabaseExplorer = new System.Windows.Forms.TabPage();
+            this.tvTables = new System.Windows.Forms.TreeView();
             this.tabPageSheetChanges = new System.Windows.Forms.TabPage();
             this.lblRefresh = new System.Windows.Forms.LinkLabel();
             this.lvSheetChanges = new System.Windows.Forms.ListView();
@@ -51,7 +52,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.diagOpenFile = new System.Windows.Forms.OpenFileDialog();
             this.diagSaveFile = new System.Windows.Forms.SaveFileDialog();
-            this.tvTables = new System.Windows.Forms.TreeView();
             this.toolStrip1.SuspendLayout();
             this.tabMain.SuspendLayout();
             this.tabDatabaseExplorer.SuspendLayout();
@@ -136,6 +136,15 @@
             this.tabDatabaseExplorer.Text = "Database Explorer";
             this.tabDatabaseExplorer.UseVisualStyleBackColor = true;
             // 
+            // tvTables
+            // 
+            this.tvTables.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvTables.Location = new System.Drawing.Point(3, 3);
+            this.tvTables.Name = "tvTables";
+            this.tvTables.Size = new System.Drawing.Size(308, 402);
+            this.tvTables.TabIndex = 2;
+            this.tvTables.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvTables_NodeMouseDoubleClick);
+            // 
             // tabPageSheetChanges
             // 
             this.tabPageSheetChanges.Controls.Add(this.lblRefresh);
@@ -205,7 +214,7 @@
             this.tabPageDataGeneration.Controls.Add(this.label1);
             this.tabPageDataGeneration.Location = new System.Drawing.Point(4, 25);
             this.tabPageDataGeneration.Name = "tabPageDataGeneration";
-            this.tabPageDataGeneration.Size = new System.Drawing.Size(314, 404);
+            this.tabPageDataGeneration.Size = new System.Drawing.Size(314, 408);
             this.tabPageDataGeneration.TabIndex = 2;
             this.tabPageDataGeneration.Text = "Data Generation";
             this.tabPageDataGeneration.UseVisualStyleBackColor = true;
@@ -278,15 +287,6 @@
             this.diagSaveFile.DefaultExt = "sql";
             this.diagSaveFile.Filter = "SQL Files (*.sql)|*.sql|All files|*.*|Text files|*.txt";
             this.diagSaveFile.Title = "Save File As";
-            // 
-            // tvTables
-            // 
-            this.tvTables.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tvTables.Location = new System.Drawing.Point(3, 3);
-            this.tvTables.Name = "tvTables";
-            this.tvTables.Size = new System.Drawing.Size(308, 402);
-            this.tvTables.TabIndex = 2;
-            this.tvTables.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvTables_NodeMouseDoubleClick);
             // 
             // ExcelAddinTaskPane
             // 
