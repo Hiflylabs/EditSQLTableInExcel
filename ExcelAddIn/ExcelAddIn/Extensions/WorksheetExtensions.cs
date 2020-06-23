@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
@@ -199,11 +201,21 @@ namespace SQLServerForExcel_Addin.Extensions
                     {
                         int rowNum = row.Row;
                         int colNum = primaryKeyColumnRange.Column;
+                        
                         primaryKeyValueRange = sheetCellsRange[rowNum, colNum] as Excel.Range;                        
+
                         if (primaryKeyValueRange != null)
                         {
-                            primaryKeyValue = primaryKeyValueRange.Value;
-                            primaryKeyDataType = primaryKeyValue.GetType().ToString();
+                            try
+                            {
+                                primaryKeyValue = primaryKeyValueRange.Value;
+                                primaryKeyDataType = primaryKeyValue.GetType().ToString();
+                            }
+                            catch (Exception)
+                            {
+                                primaryKeyValue = "";
+                                primaryKeyDataType = "NULL";                                
+                            }
 
                             foreach (Excel.Range col in colsRange)
                             {
@@ -221,17 +233,18 @@ namespace SQLServerForExcel_Addin.Extensions
                                     {
                                         rowValue = DBNull.Value;
                                         rowValueDataType = "null";                                        
-                                    }                                                                        
-                                    xmlString += "<row key=\"" + primaryKeyValue.ToString() + "\" ";                                    
-                                    xmlString += "keydatatype=\"" + primaryKeyDataType + "\" ";                                    
-                                    xmlString += "column=\"" + columnName + "\" ";                                    
-                                    xmlString += "columndatatype=\"" + rowValueDataType + "\">";                                    
-                                    xmlString += rowValue.ToString();                                    
-                                    xmlString += "</row>";                                    
-
+                                    }
+                                                                        
+                                    xmlString += "<row key=\"" + primaryKeyValue.ToString() + "\" ";
+                                    xmlString += "keydatatype=\"" + primaryKeyDataType + "\" ";
+                                    xmlString += "column=\"" + columnName + "\" ";
+                                    xmlString += "columndatatype=\"" + rowValueDataType + "\">";
+                                    xmlString += rowValue.ToString();
+                                    xmlString += "</row>";                                                                                                         
                                 }
                             }
                         }
+                        
                     }
                 }
 
@@ -288,7 +301,7 @@ namespace SQLServerForExcel_Addin.Extensions
                 customProperties = sheet.CustomProperties;
                 for (int i = 1; i <= customProperties.Count; i++)
                 {
-                    customProperty = customProperties[i];
+                    customProperty = customProperties[i];                    
                     if (customProperty != null && customProperty.Name.ToLower() == propertyName.ToLower())
                     {
                         return customProperty;
@@ -331,34 +344,37 @@ namespace SQLServerForExcel_Addin.Extensions
                         string column = dm.Attribute("column").Value;
                         string columnDataType = dm.Attribute("columndatatype").Value;
                         string value = dm.Value;
-                      
-                        sql += "UPDATE " + tableName + " SET " + column + " = ";
-                        
-                        if (columnDataType.ToLower().Contains("date") || columnDataType.ToLower().Contains("string") || columnDataType.ToLower().Contains("boolean"))
-                        {
-                            sql += "'" + value + "'";
-                        }
-                        else if (columnDataType.ToLower().Contains("null"))
-                        {
-                            sql += "null";
-                        }
-                        else
-                        {
-                            sql += value;
-                        }
 
-                        sql += " WHERE " + primaryKeyName + " = ";
-
-                        if (keyDataType.ToLower().Contains("date") || keyDataType.ToLower().Contains("string"))
+                        if (keyDataType != "NULL")
                         {
-                            sql += "'" + key + "'";
-                        }
-                        else
-                        {
-                            sql += key;
-                        }
+                            sql += "UPDATE " + tableName + " SET " + column + " = ";
 
-                        sql += Environment.NewLine;
+                            if (columnDataType.ToLower().Contains("date") || columnDataType.ToLower().Contains("string") || columnDataType.ToLower().Contains("boolean"))
+                            {
+                                sql += "'" + value + "'";
+                            }
+                            else if (columnDataType.ToLower().Contains("null"))
+                            {
+                                sql += "null";
+                            }
+                            else
+                            {
+                                sql += value;
+                            }
+
+                            sql += " WHERE " + primaryKeyName + " = ";
+
+                            if (keyDataType.ToLower().Contains("date") || keyDataType.ToLower().Contains("string"))
+                            {
+                                sql += "'" + key + "'";
+                            }
+                            else
+                            {
+                                sql += key;
+                            }
+
+                            sql += Environment.NewLine;
+                        }                                              
                     }
                 }
             }
@@ -432,7 +448,7 @@ namespace SQLServerForExcel_Addin.Extensions
             return textOut.ToString();
         }
 
-        public static string DeleteRowsFromTable(this Excel.Worksheet sheet, string tableName)
+        public static string DeleteRowsFromTable(this Excel.Worksheet sheet, string tableName, bool refresh)
         {
             Excel.Range primaryKeyColumnRange = null;
             Excel.Range columnRange = null;
@@ -479,7 +495,14 @@ namespace SQLServerForExcel_Addin.Extensions
                 string primaryKeyValuesJoined = string.Join(",", primaryKeyValues);
                 primaryKeyValuesJoined = "'" + primaryKeyValuesJoined.Replace(",", "','") + "'";
 
-                sql = "Delete from " + tableName + " Where " + primaryKey + " NOT IN( " + primaryKeyValuesJoined + ")";
+                if (refresh == false)
+                {
+                    sql = "Delete from " + tableName + " Where " + primaryKey + " NOT IN( " + primaryKeyValuesJoined + ")";
+                }
+                else if (refresh == true)
+                {
+                    sql = "Select "+ primaryKey + " from " + tableName + " Where " + primaryKey + " NOT IN( " + primaryKeyValuesJoined + ")";
+                }
 
             }
             //Debug.WriteLine(sql);
@@ -494,11 +517,32 @@ namespace SQLServerForExcel_Addin.Extensions
             List<string> rowValues = new List<string>();
             string rowValuesJoined = string.Empty;
             string primaryKey = string.Empty;
+            Excel.CustomProperty tableColumnsProperty = null;
+            Dictionary<string,string> tableColumnTypes = new Dictionary<string, string>();
+            string xml = string.Empty;
 
-            DateTime datetime;
-            string[] formats = new string[] { "yyyy-MM-dd HH:mm:ss",
-                                              "yyyy.MM.dd HH:mm:ss",
-                                              "yyyy. MM. dd. HH:mm:ss"};            
+            tableColumnsProperty = sheet.GetProperty("TableColumns");
+
+            try
+            {
+                if (tableColumnsProperty != null)
+                {
+                    xml = ToSafeXml("<tablecolumns>" + tableColumnsProperty.Value.ToString() + "</tablecolumns>");
+                    XDocument doc = XDocument.Parse(xml);                    
+                    foreach (var dm in doc.Descendants("row"))
+                    {                        
+                        string colValue = dm.Attribute("column").Value;
+                        string colDataTypeValue = dm.Attribute("columndatatype").Value;
+
+                        tableColumnTypes.Add(colValue, colDataTypeValue);
+                    }
+
+                }
+            }
+            catch (System.NullReferenceException e)
+            {
+                Console.Write(e.Message);             
+            }                                 
 
             primaryKey = sheet.PrimaryKey();
             //int lastTableRow;
@@ -526,17 +570,24 @@ namespace SQLServerForExcel_Addin.Extensions
 
                 foreach (Excel.Range row in insertRows)
                 {
-                    object[,] rwValues = (object[,])row.Cells.Value;                   
+                    object[,] rwValues = (object[,])row.Cells.Value2;                   
                     rowValues = rwValues.Cast<object>().ToList().ConvertAll(x => Convert.ToString(x));                    
                     rowValues.RemoveRange(lastTableColumn, rowValues.Count - lastTableColumn);
                     rowValues.RemoveAt(0);                                       
 
                     for (int i = 0; i < rowValues.Count; i++)
                     {
-                        if (DateTime.TryParseExact(rowValues[i], formats, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.NoCurrentDateDefault, out datetime))
+                        try
                         {
-                            rowValues[i] = datetime.ToString("yyyy-MM-dd HH:mm:ss");
+                            if (tableColumnTypes[headerRowValues[i]].ToString().Contains("date") & !string.IsNullOrEmpty(rowValues[i]))
+                            {
+                                rowValues[i] = DateTime.FromOADate(Convert.ToDouble(rowValues[i])).ToString(CultureInfo.InvariantCulture);
+                            }
                         }
+                        catch (System.Collections.Generic.KeyNotFoundException e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }                                               
 
                         if (string.IsNullOrEmpty(rowValues[i]))
                         {
@@ -568,7 +619,6 @@ namespace SQLServerForExcel_Addin.Extensions
 
             return sql;
         }
-
 
 
 

@@ -33,8 +33,9 @@
             this.btnConnectToDatabase = new System.Windows.Forms.ToolStripButton();
             this.btnRefreshData = new System.Windows.Forms.ToolStripButton();
             this.btnApplyChangesToDb = new System.Windows.Forms.ToolStripButton();
-            this.btnSaveChangesToFile = new System.Windows.Forms.ToolStripButton();
             this.tabMain = new System.Windows.Forms.TabControl();
+            this.tabPageInstructions = new System.Windows.Forms.TabPage();
+            this.textBoxInstructions = new System.Windows.Forms.TextBox();
             this.tabDatabaseExplorer = new System.Windows.Forms.TabPage();
             this.tvTables = new System.Windows.Forms.TreeView();
             this.tabPageSheetChanges = new System.Windows.Forms.TabPage();
@@ -43,20 +44,13 @@
             this.chPrimaryKey = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chColName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chNewValue = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.tabPageDataGeneration = new System.Windows.Forms.TabPage();
-            this.btnInsertDataToSelection = new System.Windows.Forms.Button();
-            this.cboColumnNames = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.btnBrowseForDataFile = new System.Windows.Forms.Button();
-            this.txtDataFile = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.diagOpenFile = new System.Windows.Forms.OpenFileDialog();
             this.diagSaveFile = new System.Windows.Forms.SaveFileDialog();
             this.toolStrip1.SuspendLayout();
             this.tabMain.SuspendLayout();
+            this.tabPageInstructions.SuspendLayout();
             this.tabDatabaseExplorer.SuspendLayout();
             this.tabPageSheetChanges.SuspendLayout();
-            this.tabPageDataGeneration.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -65,8 +59,7 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnConnectToDatabase,
             this.btnRefreshData,
-            this.btnApplyChangesToDb,
-            this.btnSaveChangesToFile});
+            this.btnApplyChangesToDb});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(322, 27);
@@ -103,27 +96,39 @@
             this.btnApplyChangesToDb.Text = "Apply changes to Database";
             this.btnApplyChangesToDb.Click += new System.EventHandler(this.btnApplyChangesToDb_Click);
             // 
-            // btnSaveChangesToFile
-            // 
-            this.btnSaveChangesToFile.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnSaveChangesToFile.Image = global::ExcelAddIn1.Properties.Resources.SaveSelectionToTableOfContentsGallery;
-            this.btnSaveChangesToFile.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSaveChangesToFile.Name = "btnSaveChangesToFile";
-            this.btnSaveChangesToFile.Size = new System.Drawing.Size(29, 24);
-            this.btnSaveChangesToFile.Text = "Save changes to File";
-            this.btnSaveChangesToFile.Click += new System.EventHandler(this.btnSaveChangesToFile_Click);
-            // 
             // tabMain
             // 
+            this.tabMain.Controls.Add(this.tabPageInstructions);
             this.tabMain.Controls.Add(this.tabDatabaseExplorer);
             this.tabMain.Controls.Add(this.tabPageSheetChanges);
-            this.tabMain.Controls.Add(this.tabPageDataGeneration);
             this.tabMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabMain.Location = new System.Drawing.Point(0, 27);
             this.tabMain.Name = "tabMain";
             this.tabMain.SelectedIndex = 0;
             this.tabMain.Size = new System.Drawing.Size(322, 437);
             this.tabMain.TabIndex = 1;
+            // 
+            // tabPageInstructions
+            // 
+            this.tabPageInstructions.Controls.Add(this.textBoxInstructions);
+            this.tabPageInstructions.Location = new System.Drawing.Point(4, 25);
+            this.tabPageInstructions.Name = "tabPageInstructions";
+            this.tabPageInstructions.Size = new System.Drawing.Size(314, 408);
+            this.tabPageInstructions.TabIndex = 2;
+            this.tabPageInstructions.Text = "Instructions";
+            this.tabPageInstructions.UseVisualStyleBackColor = true;
+            // 
+            // textBoxInstructions
+            // 
+            this.textBoxInstructions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxInstructions.Location = new System.Drawing.Point(3, 3);
+            this.textBoxInstructions.Multiline = true;
+            this.textBoxInstructions.Name = "textBoxInstructions";
+            this.textBoxInstructions.Size = new System.Drawing.Size(308, 402);
+            this.textBoxInstructions.TabIndex = 0;
+            this.textBoxInstructions.Text = resources.GetString("textBoxInstructions.Text");
             // 
             // tabDatabaseExplorer
             // 
@@ -204,79 +209,6 @@
             this.chNewValue.Text = "New Value";
             this.chNewValue.Width = 150;
             // 
-            // tabPageDataGeneration
-            // 
-            this.tabPageDataGeneration.Controls.Add(this.btnInsertDataToSelection);
-            this.tabPageDataGeneration.Controls.Add(this.cboColumnNames);
-            this.tabPageDataGeneration.Controls.Add(this.label2);
-            this.tabPageDataGeneration.Controls.Add(this.btnBrowseForDataFile);
-            this.tabPageDataGeneration.Controls.Add(this.txtDataFile);
-            this.tabPageDataGeneration.Controls.Add(this.label1);
-            this.tabPageDataGeneration.Location = new System.Drawing.Point(4, 25);
-            this.tabPageDataGeneration.Name = "tabPageDataGeneration";
-            this.tabPageDataGeneration.Size = new System.Drawing.Size(314, 408);
-            this.tabPageDataGeneration.TabIndex = 2;
-            this.tabPageDataGeneration.Text = "Data Generation";
-            this.tabPageDataGeneration.UseVisualStyleBackColor = true;
-            // 
-            // btnInsertDataToSelection
-            // 
-            this.btnInsertDataToSelection.Location = new System.Drawing.Point(82, 67);
-            this.btnInsertDataToSelection.Name = "btnInsertDataToSelection";
-            this.btnInsertDataToSelection.Size = new System.Drawing.Size(169, 23);
-            this.btnInsertDataToSelection.TabIndex = 12;
-            this.btnInsertDataToSelection.Text = "Insert random data in selection";
-            this.btnInsertDataToSelection.UseVisualStyleBackColor = true;
-            this.btnInsertDataToSelection.Click += new System.EventHandler(this.btnInsertDataToSelection_Click);
-            // 
-            // cboColumnNames
-            // 
-            this.cboColumnNames.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboColumnNames.FormattingEnabled = true;
-            this.cboColumnNames.Location = new System.Drawing.Point(82, 39);
-            this.cboColumnNames.Name = "cboColumnNames";
-            this.cboColumnNames.Size = new System.Drawing.Size(185, 24);
-            this.cboColumnNames.TabIndex = 11;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 42);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(93, 17);
-            this.label2.TabIndex = 10;
-            this.label2.Text = "Data Column:";
-            // 
-            // btnBrowseForDataFile
-            // 
-            this.btnBrowseForDataFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBrowseForDataFile.Location = new System.Drawing.Point(272, 11);
-            this.btnBrowseForDataFile.Name = "btnBrowseForDataFile";
-            this.btnBrowseForDataFile.Size = new System.Drawing.Size(24, 22);
-            this.btnBrowseForDataFile.TabIndex = 9;
-            this.btnBrowseForDataFile.Text = "...";
-            this.btnBrowseForDataFile.UseVisualStyleBackColor = true;
-            this.btnBrowseForDataFile.Click += new System.EventHandler(this.btnBrowseForDataFile_Click);
-            // 
-            // txtDataFile
-            // 
-            this.txtDataFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtDataFile.Location = new System.Drawing.Point(82, 12);
-            this.txtDataFile.Name = "txtDataFile";
-            this.txtDataFile.Size = new System.Drawing.Size(185, 22);
-            this.txtDataFile.TabIndex = 8;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 15);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 17);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Data file :";
-            // 
             // diagOpenFile
             // 
             this.diagOpenFile.Filter = "CSV files|*.csv|All files|*.*";
@@ -299,11 +231,11 @@
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.tabMain.ResumeLayout(false);
+            this.tabPageInstructions.ResumeLayout(false);
+            this.tabPageInstructions.PerformLayout();
             this.tabDatabaseExplorer.ResumeLayout(false);
             this.tabPageSheetChanges.ResumeLayout(false);
             this.tabPageSheetChanges.PerformLayout();
-            this.tabPageDataGeneration.ResumeLayout(false);
-            this.tabPageDataGeneration.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -315,7 +247,6 @@
         private System.Windows.Forms.ToolStripButton btnConnectToDatabase;
         private System.Windows.Forms.ToolStripButton btnRefreshData;
         private System.Windows.Forms.ToolStripButton btnApplyChangesToDb;
-        private System.Windows.Forms.ToolStripButton btnSaveChangesToFile;
         private System.Windows.Forms.TabControl tabMain;
         private System.Windows.Forms.TabPage tabDatabaseExplorer;
         private System.Windows.Forms.TabPage tabPageSheetChanges;
@@ -324,15 +255,10 @@
         private System.Windows.Forms.ColumnHeader chPrimaryKey;
         private System.Windows.Forms.ColumnHeader chColName;
         private System.Windows.Forms.ColumnHeader chNewValue;
-        private System.Windows.Forms.TabPage tabPageDataGeneration;
-        private System.Windows.Forms.Button btnInsertDataToSelection;
-        private System.Windows.Forms.ComboBox cboColumnNames;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btnBrowseForDataFile;
-        private System.Windows.Forms.TextBox txtDataFile;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.OpenFileDialog diagOpenFile;
         private System.Windows.Forms.SaveFileDialog diagSaveFile;
         private System.Windows.Forms.TreeView tvTables;
+        private System.Windows.Forms.TabPage tabPageInstructions;
+        private System.Windows.Forms.TextBox textBoxInstructions;
     }
 }

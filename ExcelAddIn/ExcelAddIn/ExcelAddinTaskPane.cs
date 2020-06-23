@@ -76,12 +76,14 @@ namespace SQLServerForExcel_Addin
             Excel.Range cellRange = null;
             Excel.CustomProperties sheetProperties = null;
             Excel.CustomProperty primaryKeyProperty = null;
+            Excel.CustomProperty tableColumnsProperty = null;
 
             SqlConnectionStringBuilder builder = null;
             string connString = "OLEDB;Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=True;Data Source=@servername;Initial Catalog=@databasename";
             string connStringSQL = "OLEDB;Provider=SQLOLEDB.1;Persist Security Info=True;User ID=@username;Password=@password;Data Source=@servername;Initial Catalog=@databasename";
             string databaseName = string.Empty;
             string tableName = string.Empty;
+            string xmlString = string.Empty;
 
             try
             {
@@ -115,6 +117,7 @@ namespace SQLServerForExcel_Addin
                 queryTable.PreserveFormatting = true;
                 queryTable.Refresh(false);                
                 var primaryKey = SqlUtils.GetPrimaryKey(dcd.ConnectionString, tableName);
+                var tableColumns = SqlUtils.GetAllColumns(dcd.ConnectionString, tableName);
 
                 // save original table 
                 this.tableName = tableName;
@@ -125,6 +128,17 @@ namespace SQLServerForExcel_Addin
 
                 sheetProperties = sheet.CustomProperties;
                 primaryKeyProperty = sheetProperties.Add("PrimaryKey", primaryKey);
+
+                foreach (var cols in tableColumns)
+                {
+                    xmlString += "<row column=\"" + cols.Key + "\" ";
+                    xmlString += "columndatatype=\"" + cols.Value + "\">";                    
+                    xmlString += cols.Key;
+                    xmlString += "</row>";
+
+                }
+                                
+                tableColumnsProperty = sheetProperties.Add("TableColumns", xmlString);
                 ExcelApp.EnableEvents = true;
             }
             catch (Exception ex)
@@ -134,6 +148,7 @@ namespace SQLServerForExcel_Addin
             finally
             {
                 if (primaryKeyProperty != null) Marshal.ReleaseComObject(primaryKeyProperty);
+                if (tableColumnsProperty != null) Marshal.ReleaseComObject(tableColumnsProperty);
                 if (sheetProperties != null) Marshal.ReleaseComObject(sheetProperties);
                 if (cellRange != null) Marshal.ReleaseComObject(cellRange);
                 if (queryTables != null) Marshal.ReleaseComObject(queryTables);
@@ -148,6 +163,7 @@ namespace SQLServerForExcel_Addin
             Excel.Worksheet activeSheet = null;
             Excel.CustomProperty changesProperty = null;
             string xml = string.Empty;
+            string sql = string.Empty;
 
             try
             {
@@ -170,6 +186,32 @@ namespace SQLServerForExcel_Addin
                         lvSheetChanges.Items.Add(item);
                     }
                 }
+
+                sql = activeSheet.DeleteRowsFromTable(this.tableName,true);
+                var primaryKey = activeSheet.PrimaryKey();
+                if (!string.IsNullOrEmpty(sql))
+                {
+                    using (SqlConnection conn = new SqlConnection(dcd.ConnectionString))
+                    {
+                        using (SqlCommand cmd = new SqlCommand(sql, conn))
+                        {
+                            SqlDataReader dbReader;
+                            conn.Open();
+                            dbReader = cmd.ExecuteReader();
+                            while (dbReader.Read())
+                            {
+                                ListViewItem item = new ListViewItem(new string[]
+                                {
+                                    dbReader[primaryKey].ToString(),
+                                    primaryKey,
+                                    "delete"
+                                });
+                                lvSheetChanges.Items.Add(item);                                
+                            }
+                        }
+                        conn.Close();
+                    }                    
+                }
             }
             catch (Exception ex)
             {
@@ -180,54 +222,7 @@ namespace SQLServerForExcel_Addin
                 //if (activeSheet != null) Marshal.ReleaseComObject(activeSheet);
                 //if (changesProperty != null) Marshal.ReleaseComObject(changesProperty);
             }
-        }
-
-        private void btnBrowseForDataFile_Click(object sender, EventArgs e)
-        {
-            diagOpenFile.ShowDialog();
-            if (!String.IsNullOrEmpty(diagOpenFile.FileName))
-            {
-                txtDataFile.Text = diagOpenFile.FileName;
-
-                using (GenericParserAdapter parser = new GenericParserAdapter(diagOpenFile.FileName))
-                {
-                    parser.FirstRowHasHeader = true;
-                    parser.Read();
-                    sourceData = parser.GetDataTable();
-                }
-
-                foreach (DataColumn column in sourceData.Columns)
-                {
-                    cboColumnNames.Items.Add(column.ColumnName);
-                }
-            }
-        }
-
-        private void btnInsertDataToSelection_Click(object sender, EventArgs e)
-        {
-            Excel.Range selectedRange = null;
-            int cellCount = 0;
-
-            try
-            {
-                selectedRange = ExcelApp.Selection as Excel.Range;
-                cellCount = selectedRange.Count;
-                if (selectedRange != null)
-                {
-                    List<DataRow> randomData = sourceData.Rows.OfType<DataRow>().Shuffle(new Random()).Take(cellCount).ToList();
-                    int numCount = 0;
-                    foreach (Excel.Range cell in selectedRange.Cells)
-                    {
-                        cell.Value = randomData[numCount][cboColumnNames.Text];
-                        numCount++;
-                    }
-                }
-            }
-            finally
-            {
-                if (selectedRange != null) Marshal.ReleaseComObject(selectedRange);
-            }
-        }
+        }            
 
         private void lblRefresh_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -257,40 +252,7 @@ namespace SQLServerForExcel_Addin
             {
                 return "";
             }
-        }
-
-        private void btnSaveChangesToFile_Click(object sender, EventArgs e)
-        {
-            Excel.Worksheet sheet = null;
-            Excel.CustomProperty primaryKeyProperty = null;
-            string primaryKey = string.Empty;
-
-            try
-            {
-                sheet = ExcelApp.ActiveSheet as Excel.Worksheet;
-                if (sheet != null)
-                {
-                    primaryKeyProperty = sheet.GetProperty("PrimaryKey");
-                    if (primaryKeyProperty != null)
-                    {
-                        primaryKey = primaryKeyProperty.Value.ToString();
-                        string sql = sheet.ChangesToSql(this.tableName, primaryKey);
-
-                        diagSaveFile.ShowDialog();
-                        if (!string.IsNullOrEmpty(diagSaveFile.FileName))
-                        {
-                            File.WriteAllText(diagSaveFile.FileName, sql);
-                            RefreshSheetData();
-                        }
-                    }
-                }
-            }
-            finally
-            {
-                if (primaryKeyProperty != null) Marshal.ReleaseComObject(primaryKeyProperty);
-                if (sheet != null) Marshal.ReleaseComObject(sheet);
-            }
-        }
+        }              
 
         private void RefreshSheetData()
         {
@@ -356,7 +318,7 @@ namespace SQLServerForExcel_Addin
                             primaryKey = primaryKeyProperty.Value.ToString();
                             string sql = sheet.ChangesToSql(this.tableName, primaryKey);
                             sql += Environment.NewLine;
-                            sql += sheet.DeleteRowsFromTable(this.tableName);
+                            sql += sheet.DeleteRowsFromTable(this.tableName,false);
                             sql += Environment.NewLine;
                             sql += sheet.InsertRowsIntoTable(this.tableName);
 

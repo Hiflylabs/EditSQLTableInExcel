@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Data;
 using System.Data.Sql;
 using System.Data.SqlClient;
@@ -63,9 +64,10 @@ namespace SQLServerForExcel_Addin
             return returnValue;
         }
 
-        public static List<string> GetAllColumns(string connectionString, string tableName)
+        public static Dictionary<string,string> GetAllColumns(string connectionString, string tableName)
         {
-            List<string> returnValue = new List<string>();
+            //List<string> returnValue = new List<string>();
+            Dictionary<string, string> returnValue = new Dictionary<string, string>();
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder() { ConnectionString = connectionString };
 
             tableName = tableName.Replace("dbo.", "");
@@ -78,7 +80,7 @@ namespace SQLServerForExcel_Addin
                     dbReader = cmd.ExecuteReader();
                     while (dbReader.Read())
                     {
-                        returnValue.Add(dbReader["COLUMN_NAME"].ToString());
+                        returnValue.Add(dbReader["COLUMN_NAME"].ToString(), dbReader["TYPE_NAME"].ToString());
                     }
                 }
                 conn.Close();

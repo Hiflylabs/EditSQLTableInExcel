@@ -120,6 +120,26 @@
   <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="textBoxInstructions.Text" xml:space="preserve">
+    <value>Usage Instructions:
+
+This tool is an Excel Add-in that allows for easy SQL table editing from within excel. 
+It can insert, delete and update rows and cells.
+
+To modify a table's data we need to access the table via the ConnectToDatabase button.
+
+After that, every value modification will be saved and can be viewed in the Sheet Changes tab.
+
+In the case of modified cells, the Sheet Changes tab will show the primary key of the row the modified cell is in, the column name, and the new value.
+
+During row insertion, the primary key must be left empty as that'll be filled by the database. After a new row insertion, one row for each modified cell will appear in the Sheet Changes tab, but these rows won't have an id.
+
+During row deletion, the primary key must be deleted as well. After a row has been deleted, a new row will appear in the Sheet Changes tab, displaying the primary key of the deleted row, and in the new value column the text "delete" will appear indicating that the row corresponding to that primary key is about to be deleted.
+
+If the table modifications have been finished, we must click the "Apply changes to Database" button to commit our changes.
+
+The RefreshDatabase button reverts any changes made to the table that hasn't been committed and shows the data that's currently in the database.</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblRefresh.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
