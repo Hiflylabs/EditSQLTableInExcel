@@ -478,7 +478,7 @@ namespace SQLServerForExcel_Addin.Extensions
                 rowsDeleted = false;
             }
 
-            if (rowsDeleted == true)
+            if (rowsDeleted == true | refresh == true)
             {
 
                 primaryKey = sheet.PrimaryKey();

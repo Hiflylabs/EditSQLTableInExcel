@@ -178,7 +178,6 @@
     <Compile Include="ExcelAddinTaskPane.Designer.cs">
       <DependentUpon>ExcelAddinTaskPane.cs</DependentUpon>
     </Compile>
-    <Compile Include="Extensions\EnurableExtensions.cs" />
     <Compile Include="Extensions\WorksheetExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -241,9 +240,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\SaveSelectionToQuickTablesGallery.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\SaveSelectionToTableOfContentsGallery.png" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
