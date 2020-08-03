@@ -80,7 +80,10 @@ namespace SQLServerForExcel_Addin
                     dbReader = cmd.ExecuteReader();
                     while (dbReader.Read())
                     {
-                        returnValue.Add(dbReader["COLUMN_NAME"].ToString(), dbReader["TYPE_NAME"].ToString());
+                        if (!returnValue.ContainsKey(dbReader["COLUMN_NAME"].ToString()))
+                        {
+                            returnValue.Add(dbReader["COLUMN_NAME"].ToString(), dbReader["TYPE_NAME"].ToString());
+                        }                            
                     }
                 }
                 conn.Close();

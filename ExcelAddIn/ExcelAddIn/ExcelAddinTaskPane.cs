@@ -140,10 +140,11 @@ namespace SQLServerForExcel_Addin
                                 
                 tableColumnsProperty = sheetProperties.Add("TableColumns", xmlString);
                 ExcelApp.EnableEvents = true;
-            }
+        }
             catch (Exception ex)
             {
                 Console.Write(ex.Message);
+                throw;
             }
             finally
             {
@@ -215,7 +216,7 @@ namespace SQLServerForExcel_Addin
             }
             catch (Exception ex)
             {
-                Console.Write(ex.Message);
+                Console.Write(ex.Message);                
             }
             finally
             {
