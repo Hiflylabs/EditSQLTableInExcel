@@ -127,6 +127,13 @@ namespace SQLServerForExcel_Addin
                 chPrimaryKey.Text = primaryKey;
 
                 sheetProperties = sheet.CustomProperties;
+                
+                //clear Excel properties to prevent duplicate primary key property error
+                foreach (Excel.CustomProperty prop in sheetProperties)
+                {
+                    prop.Delete();
+                }
+
                 primaryKeyProperty = sheetProperties.Add("PrimaryKey", primaryKey);
 
                 foreach (var cols in tableColumns)
@@ -140,7 +147,7 @@ namespace SQLServerForExcel_Addin
                                 
                 tableColumnsProperty = sheetProperties.Add("TableColumns", xmlString);
                 ExcelApp.EnableEvents = true;
-        }
+            }
             catch (Exception ex)
             {
                 Console.Write(ex.Message);
