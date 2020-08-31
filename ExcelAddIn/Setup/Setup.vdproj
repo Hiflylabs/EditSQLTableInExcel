@@ -15,13 +15,25 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_3E5AA10CC041117044CC19ECA08E37F0"
+        "MsmKey" = "8:_208CC9B34ACD5FF382CA6B8561D83307"
+        "OwnerKey" = "8:_F5E1EA8D6093AA2343FD37DD2764F1B1"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_208CC9B34ACD5FF382CA6B8561D83307"
         "OwnerKey" = "8:_910FE92413D4452F9386A5827A853165"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_4018CD4EF828958777769BC7BBD39719"
+        "MsmKey" = "8:_3C92C84EE654735C4D53A095920C05B6"
+        "OwnerKey" = "8:_910FE92413D4452F9386A5827A853165"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_3E5AA10CC041117044CC19ECA08E37F0"
         "OwnerKey" = "8:_910FE92413D4452F9386A5827A853165"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -63,6 +75,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_78AAC7443E654FD1A529CC221F2A0C2D"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_910FE92413D4452F9386A5827A853165"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -71,6 +89,12 @@
         {
         "MsmKey" = "8:_A66603AD162E13EC79AC62CD393EA96A"
         "OwnerKey" = "8:_910FE92413D4452F9386A5827A853165"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_B4252392F9B04267B7EBD91466909CE5"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -93,25 +117,19 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_C52491218840D7203EFFE71AA852CA25"
+        "MsmKey" = "8:_E20924C157E0A1329A324FEFFE0C7ADB"
+        "OwnerKey" = "8:_910FE92413D4452F9386A5827A853165"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F5E1EA8D6093AA2343FD37DD2764F1B1"
         "OwnerKey" = "8:_910FE92413D4452F9386A5827A853165"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_F6361F47F53224BF7400BC8B5707E8EB"
-        "OwnerKey" = "8:_910FE92413D4452F9386A5827A853165"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_F9198BBC0E5B32B7E9566176BF45923A"
-        "OwnerKey" = "8:_4018CD4EF828958777769BC7BBD39719"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_F9198BBC0E5B32B7E9566176BF45923A"
         "OwnerKey" = "8:_910FE92413D4452F9386A5827A853165"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -130,19 +148,25 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_4018CD4EF828958777769BC7BBD39719"
+        "OwnerKey" = "8:_F5E1EA8D6093AA2343FD37DD2764F1B1"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F9198BBC0E5B32B7E9566176BF45923A"
+        "OwnerKey" = "8:_208CC9B34ACD5FF382CA6B8561D83307"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_C52491218840D7203EFFE71AA852CA25"
+        "OwnerKey" = "8:_E20924C157E0A1329A324FEFFE0C7ADB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_3C92C84EE654735C4D53A095920C05B6"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -227,7 +251,7 @@
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:Release\\Setup1.msi"
+        "OutputFilename" = "8:Release\\EditSqlTableInExcel.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -282,20 +306,20 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_3E5AA10CC041117044CC19ECA08E37F0"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_208CC9B34ACD5FF382CA6B8561D83307"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Microsoft.Office.Tools.Common.v4.0.Utilities, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Microsoft.Data.ConnectionUI, Version=0.0.0.0, Culture=neutral, PublicKeyToken=ceb3fb7ec71333db, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_3E5AA10CC041117044CC19ECA08E37F0"
+                    "_208CC9B34ACD5FF382CA6B8561D83307"
                     {
-                    "Name" = "8:Microsoft.Office.Tools.Common.v4.0.Utilities.dll"
+                    "Name" = "8:Microsoft.Data.ConnectionUI.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:Microsoft.Office.Tools.Common.v4.0.Utilities.dll"
+            "SourcePath" = "8:Microsoft.Data.ConnectionUI.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_633FCDAD626E4F02AC6FA909EE4DB684"
@@ -313,20 +337,51 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_4018CD4EF828958777769BC7BBD39719"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_3C92C84EE654735C4D53A095920C05B6"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Microsoft.Data.ConnectionUI.Dialog, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d3305f5f38fbce17, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:System.Collections.Specialized, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 "ScatterAssemblies"
                 {
-                    "_4018CD4EF828958777769BC7BBD39719"
+                    "_3C92C84EE654735C4D53A095920C05B6"
                     {
-                    "Name" = "8:Microsoft.Data.ConnectionUI.Dialog.dll"
+                    "Name" = "8:System.Collections.Specialized.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:Microsoft.Data.ConnectionUI.Dialog.dll"
+            "SourcePath" = "8:System.Collections.Specialized.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_633FCDAD626E4F02AC6FA909EE4DB684"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_3E5AA10CC041117044CC19ECA08E37F0"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Microsoft.Office.Tools.Common.v4.0.Utilities, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_3E5AA10CC041117044CC19ECA08E37F0"
+                    {
+                    "Name" = "8:Microsoft.Office.Tools.Common.v4.0.Utilities.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Microsoft.Office.Tools.Common.v4.0.Utilities.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_633FCDAD626E4F02AC6FA909EE4DB684"
@@ -437,6 +492,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_78AAC7443E654FD1A529CC221F2A0C2D"
+            {
+            "SourcePath" = "8:..\\ExcelAddIn\\bin\\Release\\ExcelAddIn1.vsto"
+            "TargetName" = "8:ExcelAddIn1.vsto"
+            "Tag" = "8:"
+            "Folder" = "8:_633FCDAD626E4F02AC6FA909EE4DB684"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_A66603AD162E13EC79AC62CD393EA96A"
             {
             "AssemblyRegister" = "3:1"
@@ -466,6 +541,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B4252392F9B04267B7EBD91466909CE5"
+            {
+            "SourcePath" = "8:..\\ExcelAddIn\\bin\\Release\\ExcelAddIn1.dll.manifest"
+            "TargetName" = "8:ExcelAddIn1.dll.manifest"
+            "Tag" = "8:"
+            "Folder" = "8:_633FCDAD626E4F02AC6FA909EE4DB684"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_C03A38025CE7702B7765FECF3159A597"
@@ -499,15 +594,46 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_C52491218840D7203EFFE71AA852CA25"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_E20924C157E0A1329A324FEFFE0C7ADB"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:GenericParsing, Version=1.1.3.20473, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:GenericParsing, Version=1.1.3.30450, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                 }
             "SourcePath" = "8:GenericParsing.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_633FCDAD626E4F02AC6FA909EE4DB684"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F5E1EA8D6093AA2343FD37DD2764F1B1"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Microsoft.Data.ConnectionUI.Dialog, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d3305f5f38fbce17, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_F5E1EA8D6093AA2343FD37DD2764F1B1"
+                    {
+                    "Name" = "8:Microsoft.Data.ConnectionUI.Dialog.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Microsoft.Data.ConnectionUI.Dialog.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_633FCDAD626E4F02AC6FA909EE4DB684"
@@ -539,37 +665,6 @@
                     }
                 }
             "SourcePath" = "8:Microsoft.Office.Tools.v4.0.Framework.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_633FCDAD626E4F02AC6FA909EE4DB684"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F9198BBC0E5B32B7E9566176BF45923A"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Microsoft.Data.ConnectionUI, Version=0.0.0.0, Culture=neutral, PublicKeyToken=ceb3fb7ec71333db, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_F9198BBC0E5B32B7E9566176BF45923A"
-                    {
-                    "Name" = "8:Microsoft.Data.ConnectionUI.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:Microsoft.Data.ConnectionUI.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_633FCDAD626E4F02AC6FA909EE4DB684"
@@ -642,9 +737,9 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:Setup1"
+        "ProductName" = "8:EditSqlTableInExcel"
         "ProductCode" = "8:{39E51256-DB25-44EE-9CF6-C91ECB29CAF9}"
-        "PackageCode" = "8:{E1E45FE1-3111-4C07-A4CC-B5213C2E530B}"
+        "PackageCode" = "8:{E8ECBF3B-A6E7-415E-A9C7-00CDF1392E49}"
         "UpgradeCode" = "8:{AAD1FB40-1E48-445F-9052-D9A9D05C5E87}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -655,7 +750,7 @@
         "Manufacturer" = "8:admin"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
-        "Title" = "8:Setup1"
+        "Title" = "8:EditSqlTableInExcel"
         "Subject" = "8:"
         "ARPCONTACT" = "8:admin"
         "Keywords" = "8:"
@@ -685,20 +780,6 @@
                     "Transitive" = "11:FALSE"
                         "Keys"
                         {
-                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_5365586B12694B20B78E0CC8AB931630"
-                            {
-                            "Name" = "8:[Manufacturer]"
-                            "Condition" = "8:"
-                            "AlwaysCreate" = "11:FALSE"
-                            "DeleteAtUninstall" = "11:FALSE"
-                            "Transitive" = "11:FALSE"
-                                "Keys"
-                                {
-                                }
-                                "Values"
-                                {
-                                }
-                            }
                         }
                         "Values"
                         {
@@ -719,20 +800,6 @@
                     "Transitive" = "11:FALSE"
                         "Keys"
                         {
-                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_41F398724E774423851C1581C5F66404"
-                            {
-                            "Name" = "8:[Manufacturer]"
-                            "Condition" = "8:"
-                            "AlwaysCreate" = "11:FALSE"
-                            "DeleteAtUninstall" = "11:FALSE"
-                            "Transitive" = "11:FALSE"
-                                "Keys"
-                                {
-                                }
-                                "Values"
-                                {
-                                }
-                            }
                         }
                         "Values"
                         {
@@ -756,6 +823,114 @@
             {
                 "Keys"
                 {
+                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_B234B9B7A0AB489F908B30163115DC87"
+                    {
+                    "Name" = "8:Software"
+                    "Condition" = "8:"
+                    "AlwaysCreate" = "11:FALSE"
+                    "DeleteAtUninstall" = "11:FALSE"
+                    "Transitive" = "11:FALSE"
+                        "Keys"
+                        {
+                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_25799B3AE6D342C4ABB7608F36E9E9B0"
+                            {
+                            "Name" = "8:Microsoft"
+                            "Condition" = "8:"
+                            "AlwaysCreate" = "11:FALSE"
+                            "DeleteAtUninstall" = "11:FALSE"
+                            "Transitive" = "11:FALSE"
+                                "Keys"
+                                {
+                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_B4BEA9970EF94331A7F58B9E356BD2D4"
+                                    {
+                                    "Name" = "8:Office"
+                                    "Condition" = "8:"
+                                    "AlwaysCreate" = "11:FALSE"
+                                    "DeleteAtUninstall" = "11:FALSE"
+                                    "Transitive" = "11:FALSE"
+                                        "Keys"
+                                        {
+                                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_F8BE9A754C8F40D6B312E849B66F9B31"
+                                            {
+                                            "Name" = "8:Excel"
+                                            "Condition" = "8:"
+                                            "AlwaysCreate" = "11:FALSE"
+                                            "DeleteAtUninstall" = "11:FALSE"
+                                            "Transitive" = "11:FALSE"
+                                                "Keys"
+                                                {
+                                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_5F3DFE354E4C4EB9832453D0B468E728"
+                                                    {
+                                                    "Name" = "8:Addins"
+                                                    "Condition" = "8:"
+                                                    "AlwaysCreate" = "11:FALSE"
+                                                    "DeleteAtUninstall" = "11:FALSE"
+                                                    "Transitive" = "11:FALSE"
+                                                        "Keys"
+                                                        {
+                                                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_C907D0A697EB4117845072DCEC377E1C"
+                                                            {
+                                                            "Name" = "8:EditSQLTableInExcel.ExcelAddIn"
+                                                            "Condition" = "8:"
+                                                            "AlwaysCreate" = "11:FALSE"
+                                                            "DeleteAtUninstall" = "11:FALSE"
+                                                            "Transitive" = "11:FALSE"
+                                                                "Keys"
+                                                                {
+                                                                }
+                                                                "Values"
+                                                                {
+                                                                    "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_6CC84A9D0AC345CC9CD209905E341F30"
+                                                                    {
+                                                                    "Name" = "8:FriendlyName"
+                                                                    "Condition" = "8:"
+                                                                    "Transitive" = "11:FALSE"
+                                                                    "ValueTypes" = "3:1"
+                                                                    "Value" = "8:EditSQLTableInExcel"
+                                                                    }
+                                                                    "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_96555300BF2A45BD882E5EBA905B9B04"
+                                                                    {
+                                                                    "Name" = "8:LoadBehavior"
+                                                                    "Condition" = "8:"
+                                                                    "Transitive" = "11:FALSE"
+                                                                    "ValueTypes" = "3:3"
+                                                                    "Value" = "3:3"
+                                                                    }
+                                                                    "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_C616489B60084E929BFAC5DD496B3C17"
+                                                                    {
+                                                                    "Name" = "8:Manifest"
+                                                                    "Condition" = "8:"
+                                                                    "Transitive" = "11:FALSE"
+                                                                    "ValueTypes" = "3:1"
+                                                                    "Value" = "8:file:///[TARGETDIR]ExcelAddIn1.vsto|vstolocal"
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                        "Values"
+                                                        {
+                                                        }
+                                                    }
+                                                }
+                                                "Values"
+                                                {
+                                                }
+                                            }
+                                        }
+                                        "Values"
+                                        {
+                                        }
+                                    }
+                                }
+                                "Values"
+                                {
+                                }
+                            }
+                        }
+                        "Values"
+                        {
+                        }
+                    }
                 }
             }
         }
@@ -1249,7 +1424,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_910FE92413D4452F9386A5827A853165"
             {
-            "SourcePath" = "8:..\\ExcelAddIn1\\obj\\Debug\\ExcelAddIn1.dll"
+            "SourcePath" = "8:..\\ExcelAddIn\\obj\\Release\\ExcelAddIn1.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_633FCDAD626E4F02AC6FA909EE4DB684"
@@ -1361,7 +1536,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_B93422256D9A4FC3ABA8116AB96C2A63"
             {
-            "SourcePath" = "8:..\\GenericParser_src\\GenericParsing\\obj\\Debug\\GenericParsing.dll"
+            "SourcePath" = "8:..\\GenericParser_src\\GenericParsing\\obj\\Release\\GenericParsing.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_633FCDAD626E4F02AC6FA909EE4DB684"
