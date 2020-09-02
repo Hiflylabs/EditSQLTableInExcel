@@ -101,7 +101,15 @@ namespace SQLServerForExcel_Addin
                         .Replace("@databasename", databaseName)
                         .Replace("@username", builder.UserID)
                         .Replace("@password", builder.Password);
-                queryTables = sheet.QueryTables;                
+                queryTables = sheet.QueryTables;
+                
+                //clear Excel Querytables
+                foreach (Excel.QueryTable prop in queryTables)
+                {
+                    prop.Delete();
+                }
+                sheet.Cells.ClearContents();
+                
                 if (queryTables.Count > 0)
                 {
                     queryTable = queryTables.Item(1);
