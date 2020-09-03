@@ -571,7 +571,7 @@ namespace SQLServerForExcel_Addin.Extensions
                 foreach (Excel.Range row in insertRows)
                 {
                     object[,] rwValues = (object[,])row.Cells.Value2;                   
-                    rowValues = rwValues.Cast<object>().ToList().ConvertAll(x => Convert.ToString(x));                    
+                    rowValues = rwValues.Cast<object>().ToList().ConvertAll(x => Convert.ToString(x).Replace("'","''"));                    
                     rowValues.RemoveRange(lastTableColumn, rowValues.Count - lastTableColumn);
                     rowValues.RemoveAt(0);                                       
 
@@ -595,8 +595,8 @@ namespace SQLServerForExcel_Addin.Extensions
                         }
                     }
 
-                    rowValuesJoined = string.Join(",", rowValues);
-                    rowValuesJoined = "'" + rowValuesJoined.Replace(",", "','") + "'";
+                    rowValuesJoined = string.Join("','", rowValues);
+                    rowValuesJoined = "'" + rowValuesJoined + "'";
                     rowValuesJoined = rowValuesJoined.Replace("'NULL'", "NULL");
 
                     HashSet<string> unique_items = new HashSet<string>(rowValuesJoined.Split(','));
