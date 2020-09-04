@@ -77,6 +77,7 @@ namespace SQLServerForExcel_Addin
             Excel.CustomProperties sheetProperties = null;
             Excel.CustomProperty primaryKeyProperty = null;
             Excel.CustomProperty tableColumnsProperty = null;
+            Excel.CustomProperty tableLoadedProperty = null;
 
             SqlConnectionStringBuilder builder = null;
             string connString = "OLEDB;Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=True;Data Source=@servername;Initial Catalog=@databasename";
@@ -143,6 +144,7 @@ namespace SQLServerForExcel_Addin
                 }
 
                 primaryKeyProperty = sheetProperties.Add("PrimaryKey", primaryKey);
+                tableLoadedProperty= sheetProperties.Add("TableLoaded", 1);
 
                 foreach (var cols in tableColumns)
                 {
@@ -164,6 +166,7 @@ namespace SQLServerForExcel_Addin
             finally
             {
                 if (primaryKeyProperty != null) Marshal.ReleaseComObject(primaryKeyProperty);
+                if (tableLoadedProperty != null) Marshal.ReleaseComObject(tableLoadedProperty);
                 if (tableColumnsProperty != null) Marshal.ReleaseComObject(tableColumnsProperty);
                 if (sheetProperties != null) Marshal.ReleaseComObject(sheetProperties);
                 if (cellRange != null) Marshal.ReleaseComObject(cellRange);

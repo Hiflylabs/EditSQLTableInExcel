@@ -43,8 +43,13 @@ namespace ExcelAddIn1
         
         private void Application_SheetChange(object Sh, Excel.Range Target)
         {
+            Excel.CustomProperty tableLoadedProperty = null;
             Excel.Worksheet activeSheet = ((Excel.Worksheet)Application.ActiveSheet);
-            activeSheet.AddChangedRow(Target);           
+            tableLoadedProperty = activeSheet.GetProperty("TableLoaded");
+            if (tableLoadedProperty != null)
+            {
+                activeSheet.AddChangedRow(Target);
+            }                
         }       
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
