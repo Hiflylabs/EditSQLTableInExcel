@@ -1,28 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Xml.Linq;
 using Excel = Microsoft.Office.Interop.Excel;
-using Office = Microsoft.Office.Core;
-using Microsoft.Office.Tools.Excel;
 using SQLServerForExcel_Addin;
-using System.Diagnostics;
 using SQLServerForExcel_Addin.Extensions;
+using Microsoft.Office.Tools;
 
 namespace ExcelAddIn1
 {
     public partial class ThisAddIn
-    {
-        private ExcelAddinTaskPane taskPaneControl1;
-        private Microsoft.Office.Tools.CustomTaskPane taskPaneValue;       
+    {        
+        private Microsoft.Office.Tools.CustomTaskPane taskPaneValue;
+        public Dictionary<string, CustomTaskPane> ExcelCustomTaskPanes = new Dictionary<string, CustomTaskPane>();
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {            
-            taskPaneControl1 = new ExcelAddinTaskPane();
-            taskPaneValue = this.CustomTaskPanes.Add(
-                taskPaneControl1, "SQL Server For Excel");
-            taskPaneValue.VisibleChanged +=
-                new EventHandler(taskPaneValue_VisibleChanged);
+            this.Application.WorkbookActivate += Application_WorkbookActivate;
             this.Application.SheetChange += Application_SheetChange;            
 
         }
@@ -40,8 +32,8 @@ namespace ExcelAddIn1
                 return taskPaneValue;
             }
         }
-        
-        private void Application_SheetChange(object Sh, Excel.Range Target)
+
+    private void Application_SheetChange(object Sh, Excel.Range Target)
         {
             Excel.CustomProperty tableLoadedProperty = null;
             Excel.Worksheet activeSheet = ((Excel.Worksheet)Application.ActiveSheet);
@@ -50,7 +42,33 @@ namespace ExcelAddIn1
             {
                 activeSheet.AddChangedRow(Target);
             }                
-        }       
+        }
+
+    private void Application_WorkbookActivate(Excel.Workbook Wb)
+        {
+            var wbCtp = ExcelCustomTaskPanes.Where(wb => wb.Key == Wb.FullName).FirstOrDefault().Value;
+            if (wbCtp == null)
+            {
+                Globals.Ribbons.Ribbon1.toggleButton1.Checked = false;
+                taskPaneValue = this.CustomTaskPanes.Add(new ExcelAddinTaskPane(),
+                "SQL Server For Excel", Wb.Windows[1]);
+                taskPaneValue.VisibleChanged +=
+                    new EventHandler(taskPaneValue_VisibleChanged);
+                ExcelCustomTaskPanes.Add(Wb.FullName, taskPaneValue);
+            }
+            else
+            {
+                taskPaneValue = wbCtp;
+                if (taskPaneValue.Visible)
+                {
+                    Globals.Ribbons.Ribbon1.toggleButton1.Checked = true;
+                }
+                else
+                {
+                    Globals.Ribbons.Ribbon1.toggleButton1.Checked = false;
+                }
+            }
+        }
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
         {

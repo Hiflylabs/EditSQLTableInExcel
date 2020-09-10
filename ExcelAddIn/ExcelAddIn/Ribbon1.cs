@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Office.Tools.Ribbon;
+﻿using Microsoft.Office.Tools.Ribbon;
 
 namespace ExcelAddIn1
 {
@@ -14,7 +10,7 @@ namespace ExcelAddIn1
         }
 
         private void toggleButton1_Click(object sender, RibbonControlEventArgs e)
-        {
+        {            
             Globals.ThisAddIn.TaskPane.Visible = ((RibbonToggleButton)sender).Checked;
         }
     }
